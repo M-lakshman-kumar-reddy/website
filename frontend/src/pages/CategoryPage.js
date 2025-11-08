@@ -11,6 +11,7 @@ const CategoryPage = () => {
 
   useEffect(() => {
     fetchCategory();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const fetchCategory = async () => {
