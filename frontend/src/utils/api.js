@@ -59,7 +59,11 @@ export const submitContactForm = (formData) => {
 export const getSessionId = () => {
   let sessionId = localStorage.getItem('sessionId');
   if (!sessionId) {
-    sessionId = 'session-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+    // Use crypto API for better randomness
+    const array = new Uint8Array(16);
+    crypto.getRandomValues(array);
+    const randomString = Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
+    sessionId = 'session-' + Date.now() + '-' + randomString;
     localStorage.setItem('sessionId', sessionId);
   }
   return sessionId;
